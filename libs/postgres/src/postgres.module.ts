@@ -1,7 +1,7 @@
 import { Module, Global } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import env from '@sol/libs/env';
+import env from '@sol/env';
 import { typeOrmModuleOptions } from './config';
 import { entities } from './entities';
 import { repositories } from './repositories';

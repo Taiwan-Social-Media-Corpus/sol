@@ -1,5 +1,5 @@
 import type { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { env } from '@sol/libs/env';
+import { env } from '@sol/env';
 
 export const typeOrmModuleOptions: TypeOrmModuleOptions =
   env.nodeEnv !== 'test'
