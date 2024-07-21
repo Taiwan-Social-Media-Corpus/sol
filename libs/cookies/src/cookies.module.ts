@@ -5,4 +5,4 @@ import { CookiesService, CsrfTokenService } from './services';
   providers: [CookiesService, CsrfTokenService],
   exports: [CookiesService, CsrfTokenService],
 })
-export class CookieModule {}
+export class CookiesModule {}
