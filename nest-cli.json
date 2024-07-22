@@ -27,6 +27,42 @@
       "compilerOptions": {
         "tsConfigPath": "apps/admin/tsconfig.app.json"
       }
+    },
+    "postgres": {
+      "type": "library",
+      "root": "libs/postgres",
+      "entryFile": "index",
+      "sourceRoot": "libs/postgres/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/postgres/tsconfig.lib.json"
+      }
+    },
+    "oauth": {
+      "type": "library",
+      "root": "libs/oauth",
+      "entryFile": "index",
+      "sourceRoot": "libs/oauth/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/oauth/tsconfig.lib.json"
+      }
+    },
+    "jwt": {
+      "type": "library",
+      "root": "libs/jwt",
+      "entryFile": "index",
+      "sourceRoot": "libs/jwt/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/jwt/tsconfig.lib.json"
+      }
+    },
+    "cookies": {
+      "type": "library",
+      "root": "libs/cookies",
+      "entryFile": "index",
+      "sourceRoot": "libs/cookies/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/cookies/tsconfig.lib.json"
+      }
     }
   }
 }
