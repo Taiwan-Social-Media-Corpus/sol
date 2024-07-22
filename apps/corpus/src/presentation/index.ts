@@ -1,7 +1,7 @@
 import UserAuthController from './users/auth/auth.controller';
 import UserCsrfController from './users/csrf/csrf.controller';
 import UserRefreshController from './users/refresh/refresh.controller';
-import UserSessionsController from './users/sessions/session.controller';
+import UserSessionsController from './users/sessions/sessions.controller';
 
 const controllers = [
   UserAuthController,
