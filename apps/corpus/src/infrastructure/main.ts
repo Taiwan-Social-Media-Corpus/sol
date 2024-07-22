@@ -1,10 +1,10 @@
-import '../application/types/express';
+import '../application/types/express.d.ts';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { env } from '@sol/env';
-import { HttpExceptionFilter } from '@sol/errors/filter';
+import { HttpExceptionFilter } from '@sol/errors/filters';
 import { CorpusModule } from './app.module';
 
 async function bootstrap() {
