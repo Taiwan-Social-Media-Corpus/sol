@@ -1,8 +1,8 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "declaration": false,
-    "outDir": "../../dist/apps/corpus"
+    "declaration": true,
+    "outDir": "../../dist/libs/cookie"
   },
   "include": ["src/**/*", "../../types/**/*"],
   "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]
