@@ -1,3 +1,4 @@
+import { BadRequestException } from '@nestjs/common';
 import { UpdateUserRefreshTokenEvent } from '@sol/corpus/domain/events';
 import { Result } from '@sol/result';
 import { AggregateRoot } from '@sol/domain/model/interfaces/aggregate-root';
@@ -53,7 +54,7 @@ export class UserAggregate extends AggregateRoot<string, UserAggregateProps> {
 
   setEmail(emailVO: UserEmailVO) {
     if (this.email.equals(emailVO)) {
-      return Result.Err('Identical email address');
+      return Result.Err(new BadRequestException('Identical email address'));
     }
     this.props.email = emailVO;
     return Result.Ok(null);
