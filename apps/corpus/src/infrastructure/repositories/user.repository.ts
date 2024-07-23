@@ -1,9 +1,8 @@
 import { FindOptionsWhere } from 'typeorm';
 import { EventPublisher } from '@nestjs/cqrs';
-import { User } from '@sol/postgres';
 import { Injectable } from '@nestjs/common';
+import { User, UserRepository as _UserRepository } from '@sol/postgres';
 import { UserMapper } from '../mappers';
-import { UserRepository as _UserRepository } from '@sol/postgres';
 
 @Injectable()
 class UserRepository {
@@ -13,9 +12,7 @@ class UserRepository {
   ) {}
 
   async findOne(options: FindOptionsWhere<User>) {
-    const user = await this.userRepository.findOne({
-      where: options,
-    });
+    const user = await this.userRepository.findOne(options);
     if (!user) {
       return user;
     }
