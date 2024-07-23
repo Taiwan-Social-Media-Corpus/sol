@@ -1,3 +1,3 @@
-import { UserAggregate } from "./user";
+import { UserAggregate, UserAggregateProps } from './user';
 
-export { UserAggregate };
+export { UserAggregate, UserAggregateProps };
