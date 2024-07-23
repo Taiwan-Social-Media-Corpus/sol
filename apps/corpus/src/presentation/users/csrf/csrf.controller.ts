@@ -9,8 +9,9 @@ class UserCsrfController {
     private readonly csrfTokenService: CsrfTokenService,
     private readonly cookiesService: CookiesService,
   ) {}
+
   @Get()
-  async signUp(@Req() req: Request, @Res() res: Response) {
+  async ping(@Req() req: Request, @Res() res: Response) {
     const csrfToken = this.csrfTokenService.generate();
     const hmac = this.csrfTokenService.hmac(csrfToken);
     res.header('X-Csrf-Token', hmac);
