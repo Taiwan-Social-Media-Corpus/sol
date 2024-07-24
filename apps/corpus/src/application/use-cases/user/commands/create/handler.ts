@@ -1,4 +1,4 @@
-import { CommandHandler, ICommandHandler, EventPublisher } from '@nestjs/cqrs';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateUserService } from '@sol/corpus/application/services/users';
 import { JwtService } from '@sol/jwt';
 import { CreateUserCommand } from './command';
@@ -10,7 +10,6 @@ export class CreateUserCommandHandler
   constructor(
     private readonly createUserService: CreateUserService,
     private readonly jwtService: JwtService,
-    private readonly eventPublisher: EventPublisher,
   ) {}
 
   async execute(command: CreateUserCommand) {
@@ -24,6 +23,6 @@ export class CreateUserCommandHandler
       throw userResult.getError();
     }
 
-    return this.eventPublisher.mergeObjectContext(userResult.getValue());
+    return userResult.getValue();
   }
 }
