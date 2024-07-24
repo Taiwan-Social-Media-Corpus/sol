@@ -1,9 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "declaration": true,
-    "outDir": "../../dist/libs/cookie"
+    "declaration": false,
+    "outDir": "../../dist/apps/admin"
   },
-  "include": ["src/**/*", "../../types/**/*"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]
 }
