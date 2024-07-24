@@ -3,6 +3,7 @@ import {
   HttpException,
   InternalServerErrorException,
 } from '@nestjs/common';
+import { EventPublisher } from '@nestjs/cqrs';
 import { createId } from '@paralleldrive/cuid2';
 import {
   UserAggregate,
@@ -23,7 +24,10 @@ export type CreateUserOutput = Promise<Ok<UserAggregate> | Err<HttpException>>;
 class CreateUserService
   implements ApplicationService<CreateUserInput, CreateUserOutput>
 {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly eventPublisher: EventPublisher,
+  ) {}
   async execute(input: CreateUserInput) {
     const cuid = createId();
     const userEntity = UserAggregate.create(cuid, {
@@ -37,7 +41,8 @@ class CreateUserService
 
     const userDao = UserMapper.toPersistence(userEntity);
     try {
-      return Result.Ok(await this.userRepository.save(userDao));
+      const user = await this.userRepository.save(userDao);
+      return Result.Ok(this.eventPublisher.mergeObjectContext(user));
     } catch (error) {
       return Result.Err(new InternalServerErrorException());
     }
