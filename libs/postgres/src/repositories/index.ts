@@ -1,5 +1,6 @@
+import AdminRepository from './admin.repository';
 import UserRepository from './user.repository';
 
-const repositories = [UserRepository];
+const repositories = [AdminRepository, UserRepository];
 
-export { UserRepository, repositories };
+export { AdminRepository, UserRepository, repositories };
