@@ -3,6 +3,7 @@ import {
   HttpException,
   InternalServerErrorException,
 } from '@nestjs/common';
+import { EventPublisher } from '@nestjs/cqrs';
 import { createId } from '@paralleldrive/cuid2';
 import {
   AdminRoleVO,
@@ -32,7 +33,10 @@ export type CreateAdminOutput = Promise<
 class CreateAdminService
   implements ApplicationService<CreateAdminInput, CreateAdminOutput>
 {
-  constructor(private readonly adminRepository: AdminRepository) {}
+  constructor(
+    private readonly adminRepository: AdminRepository,
+    private readonly eventPublisher: EventPublisher,
+  ) {}
   async execute(input: CreateAdminInput) {
     const cuid = createId();
     const password = await AdminPasswordVO.createHash({
@@ -50,7 +54,8 @@ class CreateAdminService
 
     const adminDao = AdminMapper.toPersistence(adminEntity);
     try {
-      return Result.Ok(await this.adminRepository.save(adminDao));
+      const admin = await this.adminRepository.save(adminDao);
+      return Result.Ok(this.eventPublisher.mergeObjectContext(admin));
     } catch (error) {
       return Result.Err(new InternalServerErrorException());
     }
