@@ -12,6 +12,10 @@ namespace Definition {
     UserAuthToken = 'lope-auth-tk',
     UserAuthTokenSig = 'lope-auth-tk.sig',
   }
+
+  export enum RateLimit {
+    AdminLogin = 5,
+  }
 }
 
 export default Definition;
