@@ -1,4 +1,12 @@
 {
   "extends": "./tsconfig.json",
+  "include": [
+    "libs/definition/**/*",
+    "libs/domain/**/*",
+    "libs/env/**/*",
+    "libs/errors/**/*",
+    "libs/pipes/**/*",
+    "libs/result/**/*"
+  ],
   "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
 }
