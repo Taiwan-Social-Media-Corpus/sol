@@ -1,4 +1,3 @@
-import '../application/types/express.d.ts';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { NestFactory } from '@nestjs/core';
