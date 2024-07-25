@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindOneOptions, FindOptionsWhere, Repository } from 'typeorm';
+import { FindOptionsWhere, Repository } from 'typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { User } from '../entities';
 
@@ -11,16 +11,18 @@ class UserRepository {
     private readonly _userRepository: Repository<User>,
   ) {}
 
-  async exists(options: FindOneOptions<User>) {
-    return this._userRepository.count(options).then((count) => count > 0);
+  async exists(options: FindOptionsWhere<User>) {
+    return this._userRepository
+      .count({ where: options })
+      .then((count) => count > 0);
   }
 
-  async findOne(options: FindOneOptions<User>) {
-    return this._userRepository.findOne(options);
+  async findOne(options: FindOptionsWhere<User>) {
+    return this._userRepository.findOne({ where: options });
   }
 
-  async create(admin: User) {
-    return this._userRepository.save(admin);
+  async create(user: User) {
+    return this._userRepository.save(user);
   }
 
   async update(

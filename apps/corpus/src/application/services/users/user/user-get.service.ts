@@ -4,6 +4,7 @@ import {
   NotFoundException,
   InternalServerErrorException,
 } from '@nestjs/common';
+import { EventPublisher } from '@nestjs/cqrs';
 import { UserAggregate } from '@sol/corpus/domain/models/aggregate-root';
 import { UserRepository } from '@sol/corpus/infrastructure/repositories';
 import { ApplicationService } from '@sol/domain/service';
@@ -20,14 +21,17 @@ type GetUserOutput = Promise<Ok<UserAggregate> | Err<HttpException>>;
 class GetUserService
   implements ApplicationService<GetUserInput, GetUserOutput>
 {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly eventPublisher: EventPublisher,
+  ) {}
   async execute(input: GetUserInput) {
     try {
       const userEntity = await this.userRepository.findOne(input);
       if (!userEntity) {
         return Result.Err(new NotFoundException('User not found'));
       }
-      return Result.Ok(userEntity);
+      return Result.Ok(this.eventPublisher.mergeObjectContext(userEntity));
     } catch (error) {
       return Result.Err(new InternalServerErrorException());
     }
