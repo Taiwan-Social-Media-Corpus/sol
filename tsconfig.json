@@ -16,7 +16,29 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "paths": {}, 
-    "typeRoots": ["./types", "node_modules/@types"],
+    "paths": {
+      "types": ["types/*"], 
+      "@sol/admin/*": ["apps/admin/src/*"],
+      "@sol/corpus/*": ["apps/corpus/src/*"],
+      "@sol/definition": ["libs/definition/index.ts"],
+      "@sol/errors/*": ["libs/errors/*"],
+      "@sol/domain/*": ["libs/domain/*"],
+      "@sol/env": ["libs/env/index.ts"],
+      "@sol/postgres": ["libs/postgres/src"],
+      "@sol/postgres/*": ["libs/postgres/src/*"],
+      "@sol/result": ["libs/result/index.ts"],
+      "@sol/oauth": ["libs/oauth/src"],
+      "@sol/oauth/*": ["libs/oauth/src/*"],
+      "@sol/jwt": ["libs/jwt/src"],
+      "@sol/jwt/*": ["libs/jwt/src/*"],
+      "@sol/cookies": ["libs/cookies/src"],
+      "@sol/cookies/*": ["libs/cookies/src/*"],
+      "@sol/redis": ["libs/redis/src"],
+      "@sol/redis/*": ["libs/redis/src/*"]
+    },
+    "typeRoots": [
+      "types",
+      "node_modules/@types"
+    ]
   }
 }

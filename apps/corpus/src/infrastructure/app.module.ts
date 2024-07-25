@@ -1,8 +1,46 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { CqrsModule } from '@nestjs/cqrs';
+import { ConfigModule } from '@nestjs/config';
+import { CookiesMiddleware, CsrfMiddleware, CookiesModule } from '@sol/cookies';
+import env from '@sol/env';
+import { JwtModule } from '@sol/jwt';
+import { OauthModule } from '@sol/oauth';
+import { PostgresModule } from '@sol/postgres';
+import { userServices } from '../application/services/users';
+import { cqrsHandlers } from '../application/use-cases';
+import { eventHandlers } from './events';
+import { controllers } from '../presentation';
+import { repositories } from './repositories';
 
 @Module({
-  imports: [],
-  controllers: [],
-  providers: [],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [env],
+      cache: true,
+    }),
+    PostgresModule,
+    CqrsModule,
+    JwtModule,
+    CookiesModule,
+    OauthModule,
+  ],
+  controllers,
+  providers: [
+    ...userServices,
+    ...repositories,
+    ...eventHandlers,
+    ...cqrsHandlers,
+  ],
 })
-export class CorpusModule {}
+export class CorpusModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(CookiesMiddleware)
+      .forRoutes('*')
+      .apply(CsrfMiddleware)
+      .exclude('user/_ping')
+      .forRoutes(...controllers);
+  }
+}
+
