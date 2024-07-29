@@ -6,6 +6,7 @@
     "libs/env/**/*",
     "libs/errors/**/*",
     "libs/pipes/**/*",
+    "libs/requests/**/*",
     "libs/result/**/*"
   ],
   "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
