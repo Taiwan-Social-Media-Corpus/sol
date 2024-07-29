@@ -26,6 +26,7 @@
       "@sol/env": ["libs/env/index.ts"],
       "@sol/postgres": ["libs/postgres/src"],
       "@sol/postgres/*": ["libs/postgres/src/*"],
+      "@sol/requests": ["libs/requests/index.ts"],
       "@sol/result": ["libs/result/index.ts"],
       "@sol/oauth": ["libs/oauth/src"],
       "@sol/oauth/*": ["libs/oauth/src/*"],
