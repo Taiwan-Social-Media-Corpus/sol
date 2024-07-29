@@ -6,6 +6,7 @@ import env from '@sol/env';
 import { JwtModule } from '@sol/jwt';
 import { OauthModule } from '@sol/oauth';
 import { PostgresModule } from '@sol/postgres';
+import { RedisModule } from '@sol/redis';
 import { userServices } from '../application/services/users';
 import { cqrsHandlers } from '../application/use-cases';
 import { eventHandlers } from './events';
@@ -24,6 +25,7 @@ import { repositories } from './repositories';
     JwtModule,
     CookiesModule,
     OauthModule,
+    RedisModule,
   ],
   controllers,
   providers: [
@@ -43,4 +45,3 @@ export class CorpusModule implements NestModule {
       .forRoutes(...controllers);
   }
 }
-
