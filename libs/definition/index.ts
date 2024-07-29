@@ -15,6 +15,7 @@ namespace Definition {
 
   export enum RateLimit {
     AdminLogin = 5,
+    Concordance = 15,
   }
 }
 
